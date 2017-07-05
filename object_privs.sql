@@ -1,3 +1,7 @@
+-- rlockard, initial version.
+-- this will create a pivot table of object privileges. 
+-- to fine tune this, add a where clause to dba_tab_privs
+
 SELECT GRANTEE, 
       GRANTABLE, 
       OWNER, 
@@ -28,7 +32,6 @@ FROM
     type, 
     privilege
 FROM DBA_TAB_PRIVS
-WHERE grantable = 'YES' and grantee != 'SYS' AND OWNER = 'SYS' 
 )
 PIVOT (COUNT(PRIVILEGE)
     FOR PRIVILEGE IN ('SELECT',
